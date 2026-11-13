@@ -54,7 +54,15 @@ print("Совпадает с оригиналом B? ", recovered_address_b == e
 
 #solana
 
+signing_key = SigningKey(priv_bytes)
+verify_key = signing_key.verify_key
+
 sol_key = SigningKey(priv_bytes)
 sol_address = base58.b58encode(bytes(sol_key.verify_key)).decode()
+
+full_private_key = bytes(signing_key) + bytes(verify_key)
+sol_private_key_b58 = base58.b58encode(full_private_key).decode()
+
 print("SOLANA")
-print("SOL Address: ", sol_address)
+print("Public SOL Address: ", sol_address)
+print("Private key(Base58): ", sol_private_key_b58)
